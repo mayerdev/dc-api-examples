@@ -58,7 +58,9 @@ module.exports = class Auth {
             password: this.data.password
         }).lean();
 
-        if(!create) return this.send('database_error', 500); // Create user failed
+        // Deprecated
+        // if(!create) return this.send('database_error', 500);
+        // If there is an error in the database, an error 500 will be returned automatically without additional handlers
         
         // User created
         this.send('success', 200);
