@@ -1,0 +1,17 @@
+{
+  "name": "examples-auth",
+  "version": "1.0.0",
+  "description": "Authorization example for dc-api-core",
+  "main": "index.js",
+  "author": "Artem Mayer <mayer.dev@yahoo.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "dc-api-core",
+    "dev": "dc-api-core --dev",
+    "dc-init": "mkdir controllers && echo module.exports = class Index {} > ./controllers/Index.js"
+  },
+  "dependencies": {
+    "dc-api-core": "^0.2.3-7",
+    "dc-api-mongo": "^0.1.2-6"
+  }
+}

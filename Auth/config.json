@@ -1,0 +1,17 @@
+{
+    "port": 80,
+    "dev": {
+        "port": 8081
+    },
+    "plugins": ["dc-api-mongo"],
+    "session": {
+        "secret": "your_mamasha_u_nas",
+        "store": "mongo"
+    },
+    "db": {
+        "mongo": {
+            "host": "localhost",
+            "name": "auth"
+        }
+    }
+}
