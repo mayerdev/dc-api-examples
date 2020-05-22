@@ -3,7 +3,7 @@ module.exports = class Logged {
     // onLoad event
     // Will be executed before calling action method in controller.
     onLoad() {
-        if (!this.session.user) return false;
+        if (!this.session.user) return true; // Drop request
     }
 
     /*

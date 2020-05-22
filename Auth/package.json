@@ -7,8 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "dc-api-core",
-    "dev": "dc-api-core --dev",
-    "dc-init": "mkdir controllers && echo module.exports = class Index {} > ./controllers/Index.js"
+    "dev": "dc-api-core --dev"
   },
   "dependencies": {
     "dc-api-core": "^0.2.3-7",
