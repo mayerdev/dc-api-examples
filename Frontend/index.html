@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dc-api-examples-frontend</title>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="firstname" placeholder="Firstname" />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="login" placeholder="Login" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" placeholder="Password" />
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-success" onclick="register()">Register</button>
+                </div>
+                <code id="registerResult"></code>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="login1" placeholder="Login" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password1" placeholder="Password" />
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-success" onclick="register()">Register</button>
+                </div>
+                <code id="loginResult"></code>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="form-group">
+                    <button type="button" class="btn btn-block btn-success" onclick="demo(1)">Get session</button>
+                    <button type="button" class="btn btn-block btn-success" onclick="demo(2)">Demo 1</button>
+                </div>
+                <code id="demoResult"></code>
+            </div>
+        </div>
+    </div>
+    <script src="./node_modules/dc-api-client/index.js"></script>
+    <script>
+        API.settings.secure = false;
+        API.settings.base = 'localhost:8081';
+
+        const el = selector => document.querySelector(selector);
+
+        const register = async () => {
+            const res = await API.Auth.register({
+                firstname: el('#firstname').value,
+                login: el('#login').value,
+                password: el('#password').value
+            });
+
+            el('#registerResult').textContent = (res.success ? 'success: true' : 'success: fail') + ', msg: ' + res.msg;
+        }
+        
+        const login = async () => {
+            const res = await API.Auth.login({
+                login: el('#login1').value,
+                password: el('#password1').value
+            });
+
+            el('#loginResult').textContent = (res.success ? 'success: true' : 'success: fail') + ', msg: ' + res.msg;
+        }
+        
+        const demo = async type => {
+            switch(type) {
+                case 1:
+                    const sess = await API.Logged.getSession();
+                    el('#demoResult').textContent = (sess.success ? 'success: true' : 'success: fail') + ', msg: ' + sess.msg;
+                    break;
+                case 2:
+                    const demo1 = await API.Index.demo1();
+                    el('#demoResult').textContent = (demo1.success ? 'success: true' : 'success: fail') + ', msg: ' + demo1.msg;
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

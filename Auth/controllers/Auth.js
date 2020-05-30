@@ -52,7 +52,7 @@ module.exports = class Auth {
         // db.User.create(this.data);
         
         // Create user
-        const create = await db.User.create({
+        await db.User.create({
             firstname: this.data.firstname,
             login: this.data.login,
             password: this.data.password

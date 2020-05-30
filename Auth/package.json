@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Authorization example for dc-api-core",
   "main": "index.js",
+  "repository": "https://github.com/mayerdev/dc-api-examples",
   "author": "Artem Mayer <mayer.dev@yahoo.com>",
   "license": "MIT",
   "scripts": {
