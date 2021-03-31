@@ -1,13 +1,18 @@
-// Connect DBModule
-const db = require('dc-api-core/DB').mongo();
-
 // Controller class
-module.exports = class Auth {
+module.exports = class Index {
+    // onLoad event
+    // Will be executed before calling action method in controller.
+    onLoad() {
+        if (!this.session.user)
+            // Drop request
+            return true;
+    }
+
     /*
-    * Login function
-    * Route: /Index/demo1
-    */
+     * Login function
+     * Route: /Index/demo1
+     */
     async demo1() {
-        this.send('This is demo route');
+        this.send('This demo route available only for authorized users');
     }
 }

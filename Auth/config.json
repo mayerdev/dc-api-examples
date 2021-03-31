@@ -5,7 +5,7 @@
     },
     "plugins": ["dc-api-mongo"],
     "session": {
-        "secret": "your_mamasha_u_nas",
+        "secret": "random security string with high entropy",
         "store": "mongo"
     },
     "db": {
