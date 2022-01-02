@@ -1,42 +1,39 @@
+const { HttpController } = require('dc-api-core');
 // Connect DBModule
-const db = require('dc-api-core/DB').mongo();
+const db = require('dc-api-mongo').connect();
 
 // Controller class
-module.exports = class Auth {
+module.exports = class Auth extends HttpController {
     /*
-     * Login function
-     * Route: /Auth/login
+     * Login action
+     * Endpoint: /auth/login
      */
     async login() {
         // Check fields
         if(!this.data || !this.data.login || !this.data.password) return this.send('fill_fields', 400);
 
-        // Unsecure method
-        // db.User.findOne(this.data);
-
         // Find user in database
-        const user = await db.User.findOne({
+        const isExists = await db.User.exists({
             login: this.data.login,
-            // Attention. Password must be encrypted!
+            // Password should be encrypted!
             password: this.data.password
-        }).select('_id').lean();
+        });
 
-        // Check user
-        if(!user) return this.send('incorrect', 403); // Not logged
+        // User not found
+        if(!isExists) return this.send('incorrect', 403);
 
-        // Here user is logged
-        // Set session
+        // Set session data
         this.session.user = user._id;
         // Save session
         await this.session.save();
 
         // Send result "logged" with HTTP-code 200
-        this.send('logged');
+        return 'logged';
     }
 
     /*
-     * Register function
-     * Route: /Auth/register
+     * Register action
+     * Endpoint: /auth/register
      */
     async register() {
         // Check fields
@@ -52,22 +49,19 @@ module.exports = class Auth {
         // db.User.create(this.data);
 
         // Create user
+        // Any unhandled thrown error inside controller's action will cause HTTP 500 error without additional handlers
         const user = await db.User.create({
             firstname: this.data.firstname,
             login: this.data.login,
             password: this.data.password
         });
 
-        // Set session
+        // Set session data
         this.session.user = user._id;
         // Save session
         await this.session.save();
 
-        // Deprecated
-        // if(!create) return this.send('database_error', 500);
-        // If there is an error in the database, an error 500 will be returned automatically without additional handlers
-
         // User created
-        this.send('success');
+        return 'success';
     }
 }

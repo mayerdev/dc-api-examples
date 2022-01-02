@@ -48,10 +48,11 @@
                 </div>
             </div>
         </div>
-        <script src="./node_modules/dc-api-client/index.js"></script>
+        <script src="./node_modules/dc-api-client/browser.js"></script>
         <script>
             API.settings.secure = false;
             API.settings.base = 'localhost:8081';
+            API.settings.useKebab = true;
 
             const el = selector => document.querySelector(selector);
 

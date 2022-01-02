@@ -1,16 +1,16 @@
 {
   "name": "example-backend",
   "version": "1.0.0",
-  "description": "Authorization backend example for dc-api-core",
-  "main": "index.js",
+  "private": true,
+  "description": "Authorization back-end example for dc-api-core",
   "author": "Artem Mayer <mayer.dev@yahoo.com>",
-  "license": "MIT",
+
   "scripts": {
     "start": "dc-api-core",
     "dev": "dc-api-core --dev"
   },
   "dependencies": {
-    "dc-api-core": "^0.2.3-7",
-    "dc-api-mongo": "^0.1.2-6"
+    "dc-api-core": "^0.3.1-2",
+    "dc-api-mongo": "^0.2.0-3"
   }
 }

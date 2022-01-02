@@ -2,10 +2,10 @@
   "name": "example-frontend",
   "version": "1.0.0",
   "description": "Frontend example for dc-api-core",
-  "main": "index.js",
+  "private": true,
   "author": "Artem Mayer <mayer.dev@yahoo.com>",
-  "license": "MIT",
+
   "dependencies": {
-    "dc-api-client": "^1.0.3-4"
+    "dc-api-client": "^1.1.0"
   }
 }
