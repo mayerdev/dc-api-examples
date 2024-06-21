@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
+        "strict": false
+    },
+    "include": [
+        "./controllers/**/*.ts",
+        "./interfaces/**/*.ts",
+        "./models/**/*.ts"
+    ],
+    "exclude": []
+}

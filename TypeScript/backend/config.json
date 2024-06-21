@@ -1,0 +1,15 @@
+{
+	"port": 8082,
+	"db": {
+		"mongo": {
+			"host": "localhost",
+			"name": "test"
+		}
+	},
+	"session": {
+		"secret": "secret_here",
+        "store": "mongo",
+		"ttl": false
+	},
+	"plugins": ["dc-api-mongo"]
+}
