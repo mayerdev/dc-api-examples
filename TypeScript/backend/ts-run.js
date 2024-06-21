@@ -54,7 +54,7 @@ function generateTypeScriptInterface(obj, interfaceName) {
     };
 
     const interfaceBody = processProperties(obj);
-    const result = `// Generated: ${new Date().toLocaleString('ru-RU')}\ninterface ${interfaceName} {\n${interfaceBody}}`;
+    const result = `// Generated: ${new Date().toLocaleString('ru-RU')}\nexport interface ${interfaceName} {\n${interfaceBody}}`;
 
     return result;
 }
@@ -63,14 +63,25 @@ function generateTsModels() {
     const modelsDir = './models/mongo';
     const models = fs.readdirSync(modelsDir);
 
+    let db_i = '';
+    let imports = `import { Model } from 'mongoose';\n`;
+
     for (const model of models) {
+        if (model === 'Database.js' || model === 'Database.ts') continue;
+
         if (model.endsWith('.js')) {
             const data = require(`${modelsDir}/${model}`);
+            const name = model.replace('.js', '');
 
-            const interface = generateTypeScriptInterface(data, model.replace('.js', ''));
+            const interface = generateTypeScriptInterface(data, name);
             fs.writeFileSync(`${modelsDir}/${model.replace('.js', '.ts')}`, interface);
+            db_i += `  ${name}: Model<${name}>;\n`;
+            imports += `import { ${name} } from './${name}';\n`;
         }
     }
+
+    const db_interface = `// Generated: ${new Date().toLocaleString('ru-RU')}\n${imports}\nexport interface Database {\n${db_i}}`;
+    fs.writeFileSync(`${modelsDir}/Database.ts`, db_interface);
 }
 
 generateTsModels();
